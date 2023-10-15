@@ -25,7 +25,7 @@ Human obstacle detection and tracking system for robotics using a monocular came
 
 ## UML DIAGRAM
 
-![HumanObstacleDetection UML diagram](https://github.com/tarunreddyy/AcmeRobotics-PerceptionModule/images/Midterm_UML.png)
+![HumanObstacleDetection UML diagram](images/Midterm_UML.png)
 ## ACTIVITY DIAGRAM
 
-![Detection and Tracking activity diagram](https://github.com/tarunreddyy/AcmeRobotics-PerceptionModule/images/Midterm_activity_diagram.png)
+![Detection and Tracking activity diagram](Midterm_activity_diagram.png)

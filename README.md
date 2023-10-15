@@ -1,6 +1,4 @@
-# AcmeRobotics-PerceptionModule
-
-![CICD Workflow status](https://github.com/tarunreddyy/AcmeRobotics-PerceptionModule/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) [![codecov](https://codecov.io/gh/tarunreddyy/AcmeRobotics-PerceptionModule/graph/badge.svg?token=YOURTOKEN)](https://codecov.io/gh/tarunreddyy/AcmeRobotics-PerceptionModule) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+# AcmeRobotics-PerceptionModul
 
 Human obstacle detection and tracking system for robotics using a monocular camera. Utilizes Kalman Filter for real-time tracking to ensure safe robot-human interactions in shared environments.
 
@@ -28,4 +26,4 @@ Human obstacle detection and tracking system for robotics using a monocular came
 ![HumanObstacleDetection UML diagram](images/Midterm_UML.png)
 ## ACTIVITY DIAGRAM
 
-![Detection and Tracking activity diagram](Midterm_activity_diagram.png)
+![Detection and Tracking activity diagram](images/Midterm_activity_diagram.png)

@@ -9,8 +9,13 @@ Acme Robotics introduces an innovative solution aimed at revolutionizing robot-h
 
 | Team 11 |
 |---|
+| Sprint 1 |
 | **Tarun Trilokesh - 118450766** (Driver) |
 | **Sai Surya Sriramoju - 119224113** (Navigator) |
+| Sprint 2 |
+| **Tarun Trilokesh - 118450766** (Navigator) |
+| **Sai Surya Sriramoju - 119224113** (Driver) |
+
 
 ## Installation and Execution
 
@@ -38,6 +43,13 @@ The UML diagram provides a detailed view of the class structures, dependencies, 
 
 The activity diagram showcases the workflow of the Perception Module, detailing the steps involved in human detection and tracking.
 ![Detection and Tracking activity diagram](images/Midterm_activity_diagram.png)
+
+## Quad Chard
+
+Quad chart visualizing our robot's human detection and tracking project, showcasing key components and progress.
+![Quad Chart for human detection and tracking project](images/quad_chart.png)
+
+## The video explanation of the phase zero of this project can be found [here](https://drive.google.com/file/d/1l0VtLcwZwrXFP7Ti_4hcNFPFEvkQYVFW/view?usp=sharing)
 
 ## Technologies and Tools
 

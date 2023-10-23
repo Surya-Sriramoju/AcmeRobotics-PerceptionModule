@@ -1,5 +1,6 @@
 # Acme Robotics: Human Obstacle Detection and Tracking System
 
+![GitHub CI](https://github.com/tarunreddyy/AcmeRobotics-PerceptionModule/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/tarunreddyy/AcmeRobotics-PerceptionModule/branch/main/graph/badge.svg?token=639bc142-78af-47ce-9058-b08dd74ae79c)](https://codecov.io/gh/tarunreddyy/AcmeRobotics-PerceptionModule)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

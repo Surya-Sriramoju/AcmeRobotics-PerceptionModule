@@ -1,14 +1,19 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(AcmeRobotics-PerceptionModule)
 
 # Fetch GoogleTest
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        release-1.10.0
+  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
 )
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
+
+# Enables testing for this directory and below
+enable_testing()
+include(GoogleTest)
 
 set(CMAKE_CXX_STANDARD 14)
 

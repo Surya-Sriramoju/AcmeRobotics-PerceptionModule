@@ -38,17 +38,17 @@ Follow the steps below to set up and run the Human Obstacle Detection and Tracki
 ## UML Diagram
 
 The UML diagram provides a detailed view of the class structures, dependencies, and interactions within the Perception Module.
-![HumanObstacleDetection UML diagram](images/Midterm_UML.png)
+![HumanObstacleDetection UML diagram](UML/UML_diagram.pdf)
 
 ## Activity Diagram
 
 The activity diagram showcases the workflow of the Perception Module, detailing the steps involved in human detection and tracking.
-![Detection and Tracking activity diagram](images/Midterm_activity_diagram.png)
+![Detection and Tracking activity diagram](UML/UML_activity_diagram.pdf)
 
 ## Quad Chard
 
 Quad chart visualizing our robot's human detection and tracking project, showcasing key components and progress.
-![Quad Chart for human detection and tracking project](images/quad_chart.png)
+![Quad Chart for human detection and tracking project](UML/quad_chart.png)
 
 ## The video explanation of the phase zero of this project can be found [here](https://drive.google.com/file/d/1l0VtLcwZwrXFP7Ti_4hcNFPFEvkQYVFW/view?usp=sharing)
 

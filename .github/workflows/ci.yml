@@ -36,7 +36,13 @@ jobs:
     steps:
       # We want to use GitHub CI checkout version 3 to check out our branch
       - uses: actions/checkout@v3
-      
+
+      # Install OpenCV
+      - name: Install OpenCV
+        run: |
+          sudo apt update
+          sudo apt install -y libopencv-dev
+
       # Install some system pacakges
       - name: Install build packages
         run: |
@@ -45,9 +51,9 @@ jobs:
           sudo apt install -y doxygen lcov gcovr
           
       # Build, run unit test, and generate coverage report
-      - name: Configure CMake flags and build exectables
+      - name: Configure CMake flags and build executables
         run: |
-          cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
+          cmake -D OpenCV_DIR=/usr/local/lib/cmake/opencv4 -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
           cmake --build build/ --clean-first --target all test_coverage
 
       # Upload coverage result to CodeCov

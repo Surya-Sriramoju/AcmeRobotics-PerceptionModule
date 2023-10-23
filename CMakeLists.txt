@@ -25,7 +25,9 @@ add_executable(PerceptionModule src/main.cpp)
 target_link_libraries(PerceptionModule ${OpenCV_LIBS})
 
 # Set compiler flags for coverage
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+if(WANT_COVERAGE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+endif()
 
 # Create test target (assuming tests are in a directory called tests)
 add_executable(runTests tests/test_main.cpp)

@@ -7,11 +7,9 @@ FetchContent_Declare(
   googletest
   URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
 )
-# For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# Enables testing for this directory and below
 enable_testing()
 include(GoogleTest)
 
@@ -19,7 +17,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 # Find OpenCV
 find_package(OpenCV REQUIRED)
-include_directories(/usr/local/include/opencv4)
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -34,8 +32,6 @@ add_executable(PerceptionModule src/main.cpp)
 
 # Link libraries
 target_link_libraries(PerceptionModule CameraLib YOLOLib OpenCVProcessorLib ${OpenCV_LIBS})
-
-# Set target-specific include directories
 target_include_directories(CameraLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(YOLOLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(OpenCVProcessorLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
@@ -91,9 +87,9 @@ target_link_libraries(runTests gtest gtest_main ${OpenCV_LIBS})
 
 # Define a target for running tests and collecting coverage data
 add_custom_target(test_coverage
-    COMMAND ${CMAKE_CTEST_COMMAND} -C Debug --output-on-failure
-    COMMAND lcov --directory ${CMAKE_BINARY_DIR} --capture --output-file coverage.info
-    COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter out system libraries
-    COMMAND lcov --list coverage.info # debug info
+    COMMAND ./runTests
+    COMMAND lcov --directory ${CMAKE_BINARY_DIR} --base-directory ${CMAKE_SOURCE_DIR} --capture --output-file coverage.info
+    COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    COMMAND lcov --list coverage.info
     DEPENDS runTests
 )

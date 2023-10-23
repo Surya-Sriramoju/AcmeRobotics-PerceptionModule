@@ -19,7 +19,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 # Find OpenCV
 find_package(OpenCV REQUIRED)
-include_directories(/usr/local/include/opencv4)
 
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -32,13 +31,14 @@ add_library(OpenCVProcessorLib lib/OpenCVProcessor.cpp)
 # Add executable
 add_executable(PerceptionModule src/main.cpp)
 
-# Link libraries
+# Link libraries and include directories
 target_link_libraries(PerceptionModule CameraLib YOLOLib OpenCVProcessorLib ${OpenCV_LIBS})
+target_include_directories(PerceptionModule PUBLIC ${OpenCV_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
 # Set target-specific include directories
-target_include_directories(CameraLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_include_directories(YOLOLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_include_directories(OpenCVProcessorLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(CameraLib PUBLIC ${OpenCV_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(YOLOLib PUBLIC ${OpenCV_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(OpenCVProcessorLib PUBLIC ${OpenCV_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
 #
 # Doxygen Support check if Doxygen is installed
@@ -88,6 +88,7 @@ endif()
 # Create test target (assuming tests are in a directory called tests)
 add_executable(runTests tests/test_main.cpp)
 target_link_libraries(runTests gtest gtest_main ${OpenCV_LIBS})
+target_include_directories(runTests PUBLIC ${OpenCV_INCLUDE_DIRS})
 
 # Define a target for running tests and collecting coverage data
 add_custom_target(test_coverage

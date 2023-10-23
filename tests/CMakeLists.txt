@@ -7,5 +7,5 @@ add_custom_target(test_coverage
     COMMAND lcov --capture --directory . --output-file coverage.info
     COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter out system libraries
     COMMAND lcov --list coverage.info # debug info
-    DEPENDS your_test_target
+    DEPENDS runTests
 )

@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.14)
 project(AcmeRobotics-PerceptionModule)
 
+# Define model directory
+add_definitions(-DMODELS_DIR="${CMAKE_SOURCE_DIR}/models")
+
+# Set default values for WANT_COVERAGE and CMAKE_BUILD_TYPE
+set(WANT_COVERAGE ON CACHE BOOL "Enable coverage by default")
+set(CMAKE_BUILD_TYPE Debug CACHE STRING "Set build type to Debug by default")
+
 # Fetch GoogleTest
 include(FetchContent)
 FetchContent_Declare(
@@ -22,19 +29,23 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Add libraries
-add_library(CameraLib lib/Camera.cpp)
-add_library(YOLOLib lib/YOLO.cpp)
-add_library(OpenCVProcessorLib lib/OpenCVProcessor.cpp)
+# Add libraries along with their header files
+add_library(CameraLib lib/Camera.cpp include/Camera.h)
+add_library(YOLOLib lib/YOLO.cpp include/YOLO.h)
+add_library(OpenCVProcessorLib lib/OpenCVProcessor.cpp include/OpenCVProcessor.h)
 
 # Add executable
 add_executable(PerceptionModule src/main.cpp)
 
 # Link libraries
 target_link_libraries(PerceptionModule CameraLib YOLOLib OpenCVProcessorLib ${OpenCV_LIBS})
+
+# Specify include directories for each target
 target_include_directories(CameraLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(YOLOLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(OpenCVProcessorLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(PerceptionModule PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
 
 #
 # Doxygen Support check if Doxygen is installed
@@ -78,18 +89,21 @@ execute_process(COMMAND cmake -E create_symlink
 
 # Set compiler flags for coverage
 if(WANT_COVERAGE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
 endif()
 
 # Create test target (assuming tests are in a directory called tests)
 add_executable(runTests tests/test_main.cpp)
-target_link_libraries(runTests gtest gtest_main ${OpenCV_LIBS})
+target_link_libraries(runTests gtest gtest_main CameraLib YOLOLib OpenCVProcessorLib ${OpenCV_LIBS})
 
 # Define a target for running tests and collecting coverage data
 add_custom_target(test_coverage
     COMMAND ./runTests
-    COMMAND lcov --directory ${CMAKE_BINARY_DIR} --base-directory ${CMAKE_SOURCE_DIR} --capture --output-file coverage.info
-    COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage.info
-    COMMAND lcov --list coverage.info
+    COMMAND lcov --directory ${CMAKE_BINARY_DIR} --base-directory ${CMAKE_SOURCE_DIR} --capture --output-file test_coverage.info  # Updated file name
+    COMMAND lcov --remove test_coverage.info '/usr/*' --output-file test_coverage.info  # Updated file name
+    COMMAND lcov --list test_coverage.info  # Updated file name
     DEPENDS runTests
 )

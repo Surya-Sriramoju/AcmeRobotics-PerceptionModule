@@ -17,7 +17,8 @@
  * 
  * @param frame The input frame (image) to be processed.
  */
-void OpenCVProcessor::processImages(cv::Mat& frame) {
+void OpenCVProcessor::processImages(const cv::Mat& frame) {
     // Apply Gaussian blur as a sample image processing step
     cv::GaussianBlur(frame, frame, cv::Size(5, 5), 0);
 }
+

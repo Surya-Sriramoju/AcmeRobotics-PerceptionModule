@@ -27,20 +27,23 @@
  * @return int - Returns 0 on successful execution.
  */
 int main() {
-    Camera camera;             ///< Camera object to capture video frames.
-    YOLO yolo;                 ///< YOLO object for human detection.
-    OpenCVProcessor opencvProcessor;  ///< OpenCVProcessor object for image processing.
+    // Camera object to capture video frames.
+    Camera camera;
+    // YOLO object for human detection.
+    YOLO yolo;
+    // OpenCVProcessor object for image processing.
+    OpenCVProcessor opencvProcessor;
 
     while (true) {
-        cv::Mat frame = camera.captureImage();  ///< Capture image using Camera class.
-
+        // Capture image using Camera class.
+        cv::Mat frame = camera.captureImage();
         if (frame.empty()) {
             break;
         }
-
-        yolo.detect(frame);   ///< Detect humans using YOLO class.
-        opencvProcessor.processImages(frame);  ///< Process image using OpenCVProcessor class.
-
+        // Detect humans using YOLO class.
+        yolo.detect(frame);
+        // Process image using OpenCVProcessor class.
+        opencvProcessor.processImages(frame);
         // Display the frame
         cv::imshow("Frame", frame);
 
@@ -49,9 +52,7 @@ int main() {
             break;
         }
     }
-
-    camera.release();  ///< Release the camera.
-    cv::destroyAllWindows();  ///< Destroy all OpenCV windows.
-
+    camera.release();  // Release the camera.
+    cv::destroyAllWindows();  // Destroy all OpenCV windows.
     return 0;
 }

@@ -17,6 +17,17 @@ Acme Robotics introduces an innovative solution aimed at revolutionizing robot-h
 | **Tarun Trilokesh - 118450766** (Navigator) |
 | **Sai Surya Sriramoju - 119224113** (Driver) |
 
+## Work/Time Log
+
+[Work/Time Log Google Sheet](https://docs.google.com/spreadsheets/d/1ZnuffDtKv5V0M3b9U_pYbGnPewuxgqhy6Ek-bALHVhM/edit?usp=sharing)
+
+## Product Backlog
+
+[Product Backlog Google Sheet](https://docs.google.com/spreadsheets/d/1ErQ7gKkVmTWev2d3xuYLis9wqiOIVZpCDItgP2cPW3Q/edit?usp=sharing)
+
+## Iteration Backlog
+
+[Iteration Backlog Google Sheet](https://docs.google.com/spreadsheets/d/1pN1JAZEiftC3jD7QPq5EIy_5mWXuyCwmZllS3axIA70/edit?usp=sharing)
 
 ## Installation and Execution
 
@@ -33,6 +44,28 @@ Follow the steps below to set up and run the Human Obstacle Detection and Tracki
 
 # Execute the program:
   ./build/PerceptionModule
+
+# Run tests:
+  ./build/runTests
+
+# Build docs for Doxygen format:
+  cmake --build build/ --target docs
+  # open a web browser to browse the doc
+  open docs/html/index.html
+```
+
+## Building for code coverage
+```bash
+# if you don't have gcovr or lcov installed, do:
+  sudo apt-get install gcovr lcov
+# Set the build type to Debug and WANT_COVERAGE=ON
+  cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
+# Now, do a clean compile, run unit test, and generate the covereage report
+  cmake --build build/ --clean-first --target all test_coverage
+# open a web browser to browse the test coverage report
+  open build/test_coverage/index.html
+
+This generates a index.html page in the build/test_coverage sub-directory that can be viewed locally in a web browser.
 ```
 
 ## UML Diagram

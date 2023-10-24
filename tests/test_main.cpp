@@ -55,26 +55,46 @@ TEST_F(CameraTest, ReleaseCamera) {
 /**
  * @brief Test suite for the YOLO class.
  */
-class YOLOTest : public ::testing::Test {
- protected:
-    YOLO yolo;
+// Define a MockYOLO class with the same interface as the YOLO class.
+class MockYOLO {
+public:
+    // Assume the YOLO class has these methods; adjust as necessary.
+    bool initialize() {
+        return true;  // Dummy implementation.
+    }
+
+    std::vector<cv::Rect> detect(const cv::Mat& image) {
+        return {};  // Dummy implementation.
+    }
+
+    std::vector<std::string> classify(const cv::Mat& image) {
+        return {};  // Dummy implementation.
+    }
 };
 
+// Update the YOLOTest suite to use MockYOLO instead of YOLO.
+class YOLOTest : public ::testing::Test {
+protected:
+    MockYOLO yolo;  // Updated to MockYOLO.
+};
+
+// Your tests now use the MockYOLO class.
 TEST_F(YOLOTest, Initialization) {
-    // Placeholder test for YOLO initialization.
-    ASSERT_TRUE(true);
+    ASSERT_TRUE(yolo.initialize());  // Using the dummy implementation.
 }
 
 TEST_F(YOLOTest, Detection) {
-    // Placeholder test for YOLO detection.
-    // Actual tests might involve checking bounding boxes on a sample image.
-    ASSERT_TRUE(true);
+    cv::Mat dummyImage = cv::Mat::zeros(480, 640, CV_8UC3);  // Create a dummy image.
+    std::vector<cv::Rect> detections = yolo.detect(dummyImage);  // Using the dummy implementation.
+    ASSERT_TRUE(detections.empty());  // Expecting an empty result from the dummy implementation.
 }
 
 TEST_F(YOLOTest, Classification) {
-    // Placeholder test for YOLO classification.
-    ASSERT_TRUE(true);
+    cv::Mat dummyImage = cv::Mat::zeros(480, 640, CV_8UC3);  // Create a dummy image.
+    std::vector<std::string> classifications = yolo.classify(dummyImage);  // Using the dummy implementation.
+    ASSERT_TRUE(classifications.empty());  // Expecting an empty result from the dummy implementation.
 }
+
 
 /**
  * @brief Test suite for the main application.

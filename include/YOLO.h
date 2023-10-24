@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <string>
 #include <opencv2/opencv.hpp>
 
 /**
@@ -20,7 +21,9 @@
  * frames (images) captured from a camera or any other source.
  */
 class YOLO {
-public:
+ public:
+    static const std::string modelsDir;
+
     /**
      * @brief Default constructor for the YOLO class.
      * 
@@ -37,7 +40,7 @@ public:
      * 
      * @param frame The input frame (image) in which objects are to be detected.
      */
-    void detect(cv::Mat& frame);
+    void detect(const cv::Mat& frame);
 
     /**
      * @brief Classifies objects in the given frame.
@@ -47,8 +50,9 @@ public:
      * 
      * @param frame The input frame (image) in which objects are to be classified.
      */
-    void classify(cv::Mat& frame);
+    void classify(const cv::Mat& frame);
 
-private:
-    cv::dnn::Net net; ///< DNN network object for accessing the YOLO model.
+ private:
+    cv::dnn::Net net;  // Adjusted spaces between code and comment
 };
+

@@ -20,7 +20,7 @@
  * that applies a Gaussian blur, but more methods can be added as needed.
  */
 class OpenCVProcessor {
-public:
+ public:
     /**
      * @brief Processes the given frame using OpenCV functions.
      * 
@@ -30,6 +30,5 @@ public:
      * 
      * @param frame The input frame (image) to be processed.
      */
-    void processImages(cv::Mat& frame);
+    void processImages(const cv::Mat& frame);
 };
-

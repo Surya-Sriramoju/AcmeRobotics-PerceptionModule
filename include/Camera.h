@@ -19,7 +19,7 @@
  * It allows for capturing images from the camera and releasing the camera when done.
  */
 class Camera {
-public:
+ public:
     /**
      * @brief Default constructor for the Camera class.
      * 
@@ -43,6 +43,6 @@ public:
      */
     void release();
 
-private:
-    cv::VideoCapture cap; ///< Video capture object for accessing the camera.
+ private:
+    cv::VideoCapture cap;  ///< Video capture object for accessing the camera.
 };

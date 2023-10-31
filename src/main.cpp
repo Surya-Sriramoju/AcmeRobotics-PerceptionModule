@@ -34,25 +34,32 @@ int main() {
     // OpenCVProcessor object for image processing.
     OpenCVProcessor opencvProcessor;
 
-    while (true) {
-        // Capture image using Camera class.
-        cv::Mat frame = camera.captureImage();
-        if (frame.empty()) {
-            break;
-        }
-        // Detect humans using YOLO class.
-        yolo.detect(frame);
-        // Process image using OpenCVProcessor class.
-        opencvProcessor.processImages(frame);
-        // Display the frame
-        cv::imshow("Frame", frame);
+    // while (true) {
+    //     // Capture image using Camera class.
+    //     cv::Mat frame = camera.captureImage();
+    //     if (frame.empty()) {
+    //         break;
+    //     }
+    //     // Detect humans using YOLO class.
+    //     yolo.detect(frame);
+    //     // Process image using OpenCVProcessor class.
+    //     opencvProcessor.processImages(frame);
+    //     // Display the frame
+    //     cv::imshow("Frame", frame);
 
-        // Break the loop if 'q' is pressed
-        if (cv::waitKey(1) == 'q') {
-            break;
-        }
-    }
-    camera.release();  // Release the camera.
-    cv::destroyAllWindows();  // Destroy all OpenCV windows.
+    //     // Break the loop if 'q' is pressed
+    //     if (cv::waitKey(1) == 'q') {
+    //         break;
+    //     }
+    // }
+    // camera.release();  // Release the camera.
+    // cv::destroyAllWindows();  // Destroy all OpenCV windows.
+
+    cv::Mat frame = camera.readImage();
+    cv::imwrite("./data/jai.jpg", frame);
+    yolo.detect(frame);
+    opencvProcessor.processImages(frame);
+    cv::imwrite("./data/hai.jpg", frame);
+
     return 0;
 }

@@ -37,10 +37,19 @@ class Camera {
     cv::Mat captureImage();
 
     /**
+    * @brief reads an existing image
+    * This method reads an image from the directory
+    */
+    cv::Mat readImage();
+
+
+    /**
      * @brief Releases the camera.
      * 
      * This method releases the camera, freeing up any resources associated with it.
      */
+
+
     void release();
 
  private:

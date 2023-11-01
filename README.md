@@ -17,17 +17,43 @@ Acme Robotics introduces an innovative solution aimed at revolutionizing robot-h
 | **Tarun Trilokesh - 118450766** (Navigator) |
 | **Sai Surya Sriramoju - 119224113** (Driver) |
 
-## Work/Time Log
+## UML Diagram
 
-[Work/Time Log Google Sheet](https://docs.google.com/spreadsheets/d/1ZnuffDtKv5V0M3b9U_pYbGnPewuxgqhy6Ek-bALHVhM/edit?usp=sharing)
+The UML diagram provides a detailed view of the class structures, dependencies, and interactions within the Perception Module.
+![HumanObstacleDetection UML diagram](UML/UML_diagram.pdf)
 
-## Product Backlog
+## Activity Diagram
 
-[Product Backlog Google Sheet](https://docs.google.com/spreadsheets/d/1ErQ7gKkVmTWev2d3xuYLis9wqiOIVZpCDItgP2cPW3Q/edit?usp=sharing)
+The activity diagram showcases the workflow of the Perception Module, detailing the steps involved in human detection and tracking.
+![Detection and Tracking activity diagram](UML/UML_activity_diagram.pdf)
 
-## Iteration Backlog
+## Quad Chard
 
-[Iteration Backlog Google Sheet](https://docs.google.com/spreadsheets/d/1pN1JAZEiftC3jD7QPq5EIy_5mWXuyCwmZllS3axIA70/edit?usp=sharing)
+Quad chart visualizing our robot's human detection and tracking project, showcasing key components and progress.
+![Quad Chart for human detection and tracking project](UML/quad_chart.png)
+
+## The video explanation of the phase zero of this project can be found [here](https://drive.google.com/file/d/1l0VtLcwZwrXFP7Ti_4hcNFPFEvkQYVFW/view?usp=sharing)
+
+## The video explanation of the phase one of this project can be found [here](https://drive.google.com/file/d/138be7VZhMl8rAgM4BnjkiJJUl4-g0jvQ/view?usp=sharing)
+
+## The video explanation of the phase two of this project can be found [here](https://drive.google.com/file/d/138be7VZhMl8rAgM4BnjkiJJUl4-g0jvQ/view?usp=sharing)
+
+## Technologies and Tools
+
+- **Programming Language**: C++14
+- **Build System**: CMake
+- **Unit Testing**: Google Test framework
+- **Static Analysis**: cppcheck
+- **Coding Standard**: Google C++ Styleguide with cpplint validation
+- **Documentation**: Doxygen
+
+## Dependencies
+
+- OpenCV >= 4.0 (https://opencv.org/releases/)
+- YOLO v3 (https://github.com/AlexeyAB/darknet)
+- Eigen >= 3.3 (https://eigen.tuxfamily.org/dox/GettingStarted.html)
+
+All libraries integrated are open-source, ensuring smooth integration and eliminating potential legal complications.
 
 ## Installation and Execution
 
@@ -48,10 +74,6 @@ Follow the steps below to set up and run the Human Obstacle Detection and Tracki
 # Run tests:
   ./build/runTests
 
-# Build docs for Doxygen format:
-  cmake --build build/ --target docs
-  # open a web browser to browse the doc
-  open docs/html/index.html
 ```
 
 ## Building for code coverage
@@ -62,46 +84,19 @@ Follow the steps below to set up and run the Human Obstacle Detection and Tracki
   cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
 # Now, do a clean compile, run unit test, and generate the covereage report
   cmake --build build/ --clean-first --target all test_coverage
-# open a web browser to browse the test coverage report
-  open build/test_coverage/index.html
-
-This generates a index.html page in the build/test_coverage sub-directory that can be viewed locally in a web browser.
 ```
 
-## UML Diagram
+## Work/Time Log
 
-The UML diagram provides a detailed view of the class structures, dependencies, and interactions within the Perception Module.
-![HumanObstacleDetection UML diagram](UML/UML_diagram.pdf)
+[Work/Time Log Google Sheet](https://docs.google.com/spreadsheets/d/1ZnuffDtKv5V0M3b9U_pYbGnPewuxgqhy6Ek-bALHVhM/edit?usp=sharing)
 
-## Activity Diagram
+## Product Backlog
 
-The activity diagram showcases the workflow of the Perception Module, detailing the steps involved in human detection and tracking.
-![Detection and Tracking activity diagram](UML/UML_activity_diagram.pdf)
+[Product Backlog Google Sheet](https://docs.google.com/spreadsheets/d/1ErQ7gKkVmTWev2d3xuYLis9wqiOIVZpCDItgP2cPW3Q/edit?usp=sharing)
 
-## Quad Chard
+## Iteration Backlog
 
-Quad chart visualizing our robot's human detection and tracking project, showcasing key components and progress.
-![Quad Chart for human detection and tracking project](UML/quad_chart.png)
-
-## The video explanation of the phase zero of this project can be found [here](https://drive.google.com/file/d/1l0VtLcwZwrXFP7Ti_4hcNFPFEvkQYVFW/view?usp=sharing)
-
-## The video explanation of the phase one of this project can be found [here](https://drive.google.com/file/d/138be7VZhMl8rAgM4BnjkiJJUl4-g0jvQ/view?usp=sharing)
-
-## Technologies and Tools
-
-- **Programming Language**: C++14
-- **Build System**: CMake
-- **Unit Testing**: Google Test framework
-- **Static Analysis**: cppcheck
-- **Coding Standard**: Google C++ Styleguide with cpplint validation
-- **Documentation**: Doxygen
-
-## External Libraries
-
-- **YOLO (You Only Look Once)**: Used for real-time human detection and tracking.
-- **OpenCV**: Employed for supplementary image processing tasks.
-
-All libraries integrated are open-source, ensuring smooth integration and eliminating potential legal complications.
+[Iteration Backlog Google Sheet](https://docs.google.com/spreadsheets/d/1pN1JAZEiftC3jD7QPq5EIy_5mWXuyCwmZllS3axIA70/edit?usp=sharing)
 
 ## Key Features
 

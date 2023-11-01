@@ -1,13 +1,17 @@
+// Copyright 2023 Sai Surya Sriramoju
+
 /**
  * @file CoordToWorld.cpp
  * @author Sai Surya Sriramoju (saisurya@umd.edu)
- * @brief Converts the pixel coordinates of the detections to real worl coordinates
- * @version 0.1
- * @date 2023-10-31
- * 
- * @copyright Copyright (c) 2023
- * 
+ * @date 10/31/2023
+ * @version 1.0
+ *
+ * @brief Implements functionality for converting pixel coordinates to real world coordinates.
+ *
+ * Defines methods for computing a projection matrix and converting pixel coordinates to world coordinates
+ * based on the intrinsic and extrinsic parameters of the camera.
  */
+
 #include "CoordToWorld.h"
 
 using Eigen::Matrix3f;
@@ -15,8 +19,19 @@ using Eigen::MatrixXf;
 using Eigen::Vector3f;
 using Eigen::Vector4f;
 
+/**
+ * @brief Sets the default focal length of the camera.
+ */
 double CoordToWorld::focalLen = 27.0;
 
+/**
+ * @brief Computes the projection matrix based on intrinsic and extrinsic camera parameters.
+ *
+ * The intrinsic matrix is defined based on the focal length of the camera, and the extrinsic matrix is assumed.
+ * The method then computes the projection matrix by multiplying the intrinsic and extrinsic matrices.
+ *
+ * @return MatrixXf - The computed projection matrix.
+ */
 MatrixXf CoordToWorld::transMat() {
   Matrix3f intrinsic;
   intrinsic << focalLen, 0, 0, 0, focalLen, 0, 0, 0, 1;
@@ -27,6 +42,17 @@ MatrixXf CoordToWorld::transMat() {
   return T;
 }
 
+/**
+ * @brief Converts pixel coordinates to real world coordinates.
+ *
+ * Utilizes the computed projection matrix to convert given pixel coordinates to world coordinates.
+ * The method iterates through the given vector of pixel coordinates, computes the corresponding world
+ * coordinates, and populates a vector with these world coordinates which is then returned.
+ *
+ * @param T - The projection matrix.
+ * @param coordValues - A vector of pixel coordinates.
+ * @return std::vector<double> - A vector of computed world coordinates in XYZ format.
+ */
 std::vector<double> CoordToWorld::worldPoints(MatrixXf T, std::vector<double> coordValues) {
 
     std::vector<double> actual_world;

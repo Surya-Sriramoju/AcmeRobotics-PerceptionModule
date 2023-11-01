@@ -22,6 +22,10 @@ include(GoogleTest)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# Find and Include Eigen
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
+
 # Find OpenCV
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})

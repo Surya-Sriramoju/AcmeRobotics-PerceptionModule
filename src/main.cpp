@@ -34,36 +34,43 @@ int main() {
     YOLO yolo;
     // OpenCVProcessor object for image processing.
     OpenCVProcessor opencvProcessor;
-
+    // CoordToWorld object for coordinate transformation.
     CoordToWorld world_coord;
     
-    while (true) {
+    while (true) {  // Continuous loop to process video frames
         // Capture image using Camera class.
         cv::Mat frame = camera.captureImage();
         if (frame.empty()) {
-            break;
+            break;  // Break the loop if no more frames
         }
         
+        // Detect humans using YOLO.
         std::vector<double> pixel_coords = yolo.detect(frame);
+        // Process the captured frame.
         opencvProcessor.processImages(frame);
+        // Compute the transformation matrix.
         MatrixXf TM(3, 4);
         TM = world_coord.transMat();
+        // Compute real world coordinates.
         std::vector<double> real_world = world_coord.worldPoints(TM, pixel_coords);
-        int count = 1;
+        int count = 1;  // Counter for number of persons detected
         for (long unsigned int i = 0; i < 2; i = i + 3) {
             std::cout << "Person " << count
-                << " world coordinates :" << real_world.at(i) << ", "
-                << real_world.at(i + 1) << ", " << real_world.at(i + 2) << "\n";
+                      << " world coordinates :" << real_world.at(i) << ", "
+                      << real_world.at(i + 1) << ", " << real_world.at(i + 2) << "\n";
             count++;
         }
+        // @brief Display the processed frame.
         cv::imshow("Camera", frame);
         if (cv::waitKey(1) == 'q') {
-            break;
+            break;  // Break the loop if 'q' is pressed
         }
 
     }
-    camera.release();  // Release the camera.
-    cv::destroyAllWindows();  // Destroy all OpenCV windows.
+    // Release the camera.
+    camera.release();
+    // Destroy all OpenCV windows.
+    cv::destroyAllWindows();
 
     return 0;
 }

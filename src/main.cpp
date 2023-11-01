@@ -16,6 +16,7 @@
 #include "Camera.h"
 #include "YOLO.h"
 #include "OpenCVProcessor.h"
+#include "CoordToWorld.h"
 
 /**
  * @brief Main function to run the AcmeRobotics-PerceptionModule project.
@@ -34,32 +35,35 @@ int main() {
     // OpenCVProcessor object for image processing.
     OpenCVProcessor opencvProcessor;
 
-    // while (true) {
-    //     // Capture image using Camera class.
-    //     cv::Mat frame = camera.captureImage();
-    //     if (frame.empty()) {
-    //         break;
-    //     }
-    //     // Detect humans using YOLO class.
-    //     yolo.detect(frame);
-    //     // Process image using OpenCVProcessor class.
-    //     opencvProcessor.processImages(frame);
-    //     // Display the frame
-    //     cv::imshow("Frame", frame);
+    CoordToWorld world_coord;
+    
+    while (true) {
+        // Capture image using Camera class.
+        cv::Mat frame = camera.captureImage();
+        if (frame.empty()) {
+            break;
+        }
+        
+        std::vector<double> pixel_coords = yolo.detect(frame);
+        opencvProcessor.processImages(frame);
+        MatrixXf TM(3, 4);
+        TM = world_coord.transMat();
+        std::vector<double> real_world = world_coord.worldPoints(TM, pixel_coords);
+        int count = 1;
+        for (long unsigned int i = 0; i < 2; i = i + 3) {
+            std::cout << "Person " << count
+                << " world coordinates :" << real_world.at(i) << ", "
+                << real_world.at(i + 1) << ", " << real_world.at(i + 2) << "\n";
+            count++;
+        }
+        cv::imshow("Camera", frame);
+        if (cv::waitKey(1) == 'q') {
+            break;
+        }
 
-    //     // Break the loop if 'q' is pressed
-    //     if (cv::waitKey(1) == 'q') {
-    //         break;
-    //     }
-    // }
-    // camera.release();  // Release the camera.
-    // cv::destroyAllWindows();  // Destroy all OpenCV windows.
-
-    cv::Mat frame = camera.readImage();
-    cv::imwrite("./data/jai.jpg", frame);
-    yolo.detect(frame);
-    opencvProcessor.processImages(frame);
-    cv::imwrite("./data/hai.jpg", frame);
+    }
+    camera.release();  // Release the camera.
+    cv::destroyAllWindows();  // Destroy all OpenCV windows.
 
     return 0;
 }

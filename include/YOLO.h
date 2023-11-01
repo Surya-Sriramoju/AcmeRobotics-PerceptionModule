@@ -40,7 +40,7 @@ class YOLO {
      * 
      * @param frame The input frame (image) in which objects are to be detected.
      */
-    void detect(const cv::Mat& frame);
+    std::vector<double> detect(const cv::Mat& frame);
 
     /**
      * @brief Classifies objects in the given frame.

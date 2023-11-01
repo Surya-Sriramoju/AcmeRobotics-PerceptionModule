@@ -13,11 +13,11 @@
  * @brief Constructor for the Camera class. Initializes the camera.
  */
 Camera::Camera() {
-    // cap.open(0);  // Open the default camera (index 0)
-    // if (!cap.isOpened()) {
-    //     std::cerr << "Error opening camera" << std::endl;
-    //     exit(-1);
-    // }
+    cap.open(0);  // Open the default camera (index 0)
+    if (!cap.isOpened()) {
+        std::cerr << "Error opening camera" << std::endl;
+        exit(-1);
+    }
 }
 
 /**
@@ -28,12 +28,6 @@ cv::Mat Camera::captureImage() {
     cv::Mat frame;
     cap >> frame;  // Capture a frame from the camera
     return frame;
-}
-
-cv::Mat Camera::readImage()
-{
-    cv::Mat image = cv::imread("./data/people.jpg");
-    return image;
 }
 
 /**

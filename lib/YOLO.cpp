@@ -48,7 +48,7 @@ YOLO::YOLO() {
  * 
  * @param frame The input frame (image) in which objects are to be detected.
  */
-void YOLO::detect(const cv::Mat& frame) {
+std::vector<double> YOLO::detect(const cv::Mat& frame) {
     // Convert the image to blob for neural network preprocessing
     cv::Mat blob = cv::dnn::blobFromImage(
         frame, 1/255.0, cv::Size(416, 416), cv::Scalar(0, 0, 0), true, false);
@@ -83,11 +83,6 @@ void YOLO::detect(const cv::Mat& frame) {
                 int height = static_cast<int>(data[3] * frame.rows);
                 int left = centerX - width / 2;
                 int top = centerY - height / 2;
-
-                // Annotate the frame with a bounding box
-                // cv::Point topL(left, top);
-                // cv::Point bottomR(left + width, top + height);
-                // cv::rectangle(frame, topL, bottomR, cv::Scalar(0, 255, 0), 2);
 
                 boxes.push_back(cv::Rect(left, top, width, height));
                 confidences.push_back(confidence);
@@ -131,6 +126,8 @@ void YOLO::detect(const cv::Mat& frame) {
                 cv::Point(box.x, box.y - 5), cv::FONT_HERSHEY_SIMPLEX, 1,
                 cv::Scalar(0, 0, 0), 2);
     }
+
+    return pixel_coords;
 
 }
 

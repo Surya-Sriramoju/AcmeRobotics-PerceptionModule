@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "OpenCVProcessor.h"
 #include "YOLO.h"
+#include <Eigen/Dense>
 
 /**
  * @brief Test suite for the Camera class.
@@ -95,6 +96,51 @@ TEST_F(YOLOTest, Classification) {
     ASSERT_TRUE(classifications.empty());  // Expecting an empty result from the dummy implementation.
 }
 
+/**
+ * @brief Mock class for CoordToWorld
+ */
+class MockCoordToWorld {
+public:
+    MockCoordToWorld() {}
+    Eigen::MatrixXf transMat() {
+        // Return a dummy transformation matrix.
+        Eigen::MatrixXf dummy(3, 4);
+        dummy << 1, 0, 0, 0,
+                 0, 1, 0, 0,
+                 0, 0, 1, 1;
+        return dummy;
+    }
+
+    std::vector<double> worldPoints(Eigen::MatrixXf T, std::vector<double> coordValues) {
+        // Return dummy world points.
+        return {1.0, 2.0, 3.0};
+    }
+};
+
+/**
+ * @brief Test suite for the CoordToWorld class.
+ */
+class CoordToWorldTest : public ::testing::Test {
+protected:
+    MockCoordToWorld coordToWorld;  // Using MockCoordToWorld.
+};
+
+// Test for the transformation matrix computation.
+TEST_F(CoordToWorldTest, ComputeTransMat) {
+    Eigen::MatrixXf dummyMatrix = coordToWorld.transMat();
+    ASSERT_EQ(dummyMatrix(0, 0), 1);  // Check an element of the dummy matrix.
+    ASSERT_EQ(dummyMatrix.rows(), 3);  // Check the number of rows in the dummy matrix.
+    ASSERT_EQ(dummyMatrix.cols(), 4);  // Check the number of columns in the dummy matrix.
+}
+
+// Test for the world points computation.
+TEST_F(CoordToWorldTest, ComputeWorldPoints) {
+    Eigen::MatrixXf dummyMatrix = coordToWorld.transMat();
+    std::vector<double> dummyPixelCoords = {100.0, 200.0};
+    std::vector<double> worldCoords = coordToWorld.worldPoints(dummyMatrix, dummyPixelCoords);
+    ASSERT_EQ(worldCoords.size(), 3);  // Check the size of the returned vector.
+    ASSERT_EQ(worldCoords[0], 1.0);   // Check a value from the dummy world coordinates.
+}
 
 /**
  * @brief Test suite for the main application.

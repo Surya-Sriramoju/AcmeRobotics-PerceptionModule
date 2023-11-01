@@ -41,6 +41,8 @@ class Camera {
      * 
      * This method releases the camera, freeing up any resources associated with it.
      */
+
+
     void release();
 
  private:

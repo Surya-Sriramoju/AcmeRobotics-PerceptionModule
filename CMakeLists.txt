@@ -22,6 +22,10 @@ include(GoogleTest)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# Find and Include Eigen
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
+
 # Find OpenCV
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
@@ -33,17 +37,19 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_library(CameraLib lib/Camera.cpp include/Camera.h)
 add_library(YOLOLib lib/YOLO.cpp include/YOLO.h)
 add_library(OpenCVProcessorLib lib/OpenCVProcessor.cpp include/OpenCVProcessor.h)
+add_library(WorldCoordLib lib/CoordToWorld.cpp include/CoordToWorld.h)
 
 # Add executable
 add_executable(PerceptionModule src/main.cpp)
 
 # Link libraries
-target_link_libraries(PerceptionModule CameraLib YOLOLib OpenCVProcessorLib ${OpenCV_LIBS})
+target_link_libraries(PerceptionModule CameraLib YOLOLib OpenCVProcessorLib WorldCoordLib ${OpenCV_LIBS})
 
 # Specify include directories for each target
 target_include_directories(CameraLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(YOLOLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(OpenCVProcessorLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(WorldCoordLib PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(PerceptionModule PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 

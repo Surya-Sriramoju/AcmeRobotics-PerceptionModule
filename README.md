@@ -36,7 +36,7 @@ Quad chart visualizing our robot's human detection and tracking project, showcas
 
 ## The video explanation of the phase one of this project can be found [here](https://drive.google.com/file/d/138be7VZhMl8rAgM4BnjkiJJUl4-g0jvQ/view?usp=sharing)
 
-## The video explanation of the phase two of this project can be found [here](https://drive.google.com/file/d/138be7VZhMl8rAgM4BnjkiJJUl4-g0jvQ/view?usp=sharing)
+## The video explanation of the phase two of this project can be found [here](https://drive.google.com/file/d/1krInTFpesyZgamGzxQT9dun01l13-Pn5/view?usp=sharing)
 
 ## Technologies and Tools
 
